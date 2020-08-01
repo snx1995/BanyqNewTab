@@ -1,11 +1,18 @@
 <template>
     <div class="tab-index">
-        <h1>It works!!!!!</h1>
+        <CommonUseWebsites/>
+        <SwitchTheme/>
     </div>
 </template>
 <script>
+import CommonUseWebsites from './common-website';
+import SwitchTheme from './switch-theme';
 export default {
     name: 'App',
+    components: {
+        CommonUseWebsites,
+        SwitchTheme
+    },
     data() {
         return {
 
@@ -15,8 +22,6 @@ export default {
 </script>
 <style lang="less" scoped>
 .tab-index {
-    h1 {
-        color: var(--g4);
-    }
+    
 }
 </style>

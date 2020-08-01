@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm run test",
     "dev": "webpack-dev-server --config=./webpack/dev.js",
-    "build": "webpack --config=./webpack/prod.js"
+    "build": "npm run clean && webpack --config=./webpack/prod.js",
+    "clean": "rm -rf ./dist"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "@babel/polyfill": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^4.2.0",
     "html-webpack-plugin": "^4.3.0",
     "less": "^3.12.2",
@@ -32,7 +34,7 @@
     "mini-css-extract-plugin": "^0.9.0",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
-    "vue-loader": "^14.2.4",
+    "vue-loader": "^15.9.3",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.44.1",

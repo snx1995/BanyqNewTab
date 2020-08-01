@@ -2,7 +2,8 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const src = path.resolve(__dirname, '../src');
 
@@ -25,7 +26,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.vue/,
+                test: /\.vue$/,
                 loader: 'vue-loader'
             },
             {
@@ -59,6 +60,13 @@ module.exports = {
             template: 'index.html'
         }),
         new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new VueLoaderPlugin(),
+        new CopyWebpackPlugin({
+            patterns: [
+                'manifest.json',
+                'logo.png'
+            ]
+        })
     ]
 }
