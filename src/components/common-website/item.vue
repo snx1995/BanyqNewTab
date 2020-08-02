@@ -40,6 +40,8 @@ export default {
     border-radius: 10px;
     cursor: pointer;
     margin-right: 10px;
+    background-color: var(--secondaryBg);
+    box-shadow: 4px 4px 8px rgba(7, 17, 27, .3);
     &:hover {
         border-width: 5px;
     }
@@ -50,8 +52,8 @@ export default {
         align-items: center;
         justify-content: center;
         img {
-            widows: 30px;
-            height: 30px;
+            widows: 60%;
+            height: 60%;
         }
     }
     &-add {

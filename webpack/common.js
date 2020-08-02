@@ -19,7 +19,8 @@ module.exports = {
         alias: {
             '@src': src,
             '@assets': '@src/assets',
-            '@components': '@src/components'
+            '@components': '@src/components',
+            '@common': '@components/common',
         },
         extensions: ['.js', '.json', '.vue', '.less', '.css']
     },
