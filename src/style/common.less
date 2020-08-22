@@ -23,6 +23,14 @@ body, html {
     }
 }
 
+.form-el {
+    transition: filter .3s;
+    filter: brightness(.7);
+    &:hover, &:focus, &.focus {
+        filter: brightness(1);
+    }
+}
+
 .display-none {
     display: none;
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="switch-theme">
         <div class="switch-theme-content">
-            <div class="switch-theme-item" v-for="i in 20" :key="i" :style="{backgroundColor: `var(--f${i})`}" @click="changeTheme(`var(--f${i})`)"></div>
+            <div class="switch-theme-item" v-for="i in 20" :key="i" :style="{backgroundColor: `var(--f${i})`}" @click="changeMainColor(`var(--f${i})`)"></div>
         </div>
     </div>
 </template>
@@ -9,12 +9,31 @@
 export default {
     name: 'SwitchTheme',
     data() {
-        return {}
+        return {
+            theme: {
+                mainColor: 'var(--f5)'
+            }
+        }
+    },
+    watch: {
+        theme: {
+            deep: true,
+            handler(val) {
+                localStorage.setItem('SwitchTheme', JSON.stringify(val))
+                this.applyTheme()
+            }
+        }
     },
     methods: {
-        changeTheme(color) {
-            document.documentElement.style.setProperty('--mainColor', color);
+        changeMainColor(color) {
+            this.theme.mainColor = color;
+        },
+        applyTheme() {
+            document.documentElement.style.setProperty('--mainColor', this.theme.mainColor);
         }
+    },
+    mounted() {
+        this.theme = JSON.parse(localStorage.getItem('SwitchTheme') || '{\"mainColor\":\"var(--f5)\"}');
     }
 }
 </script>

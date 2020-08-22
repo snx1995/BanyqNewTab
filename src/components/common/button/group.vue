@@ -1,5 +1,5 @@
 <template>
-    <div class="button-group">
+    <div class="button-group" :class="groupCls">
         <slot></slot>
     </div>
 </template>
@@ -7,7 +7,17 @@
 export default {
     name: 'ButtonGroup',
     props: {
-        
+        align: {
+            type: String,
+            default: 'left'
+        }
+    },
+    computed: {
+        groupCls() {
+            return [
+                `align-${this.align}`
+            ]
+        }
     },
     data() {
         return {}
@@ -17,6 +27,9 @@ export default {
 <style lang="less" scoped>
 .button-group {
     display: flex;
+    &.align-right {
+        justify-content: flex-end;
+    }
     /deep/ .button {
         border-radius: 0;
         &:first-child {

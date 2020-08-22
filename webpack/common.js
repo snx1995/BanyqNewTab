@@ -22,6 +22,7 @@ module.exports = {
             '@components': '@src/components',
             '@common': '@components/common',
             '@style': '@src/style',
+            '@utils': '@src/utils',
         },
         extensions: ['.js', '.json', '.vue', '.less', '.css']
     },
