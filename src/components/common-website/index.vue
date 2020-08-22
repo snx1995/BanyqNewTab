@@ -1,7 +1,16 @@
 <template>
     <div class="common-use-websites">
-        <Item v-for="(item, index) in websites" :data="item" :key="index"/>
-        <Item @click.native="showAddDialog"/>
+        <VueDraggable v-model="websites" class="drag-content">
+            <transition-group>
+                <Item :showRemove="showRemove" v-for="(item, index) in websites" :data="item" :key="item.src" @on-remove="handleRemove(index)"/>
+            </transition-group>
+        </VueDraggable>
+        <transition name="fade">
+            <Item type="add" @click.native="showAddDialog" v-show="!showRemove"/>
+        </transition>
+        <transition name="fade">
+            <Item type="remove" @click.native="showRemove = true" v-show="!showRemove"/>
+        </transition>
         <Modal v-model="showModal" width="400" title="添加常用网站">
             <div class="content">
                 <Input label="名称" v-model="form.addWebName"/>
@@ -40,6 +49,7 @@ export default {
         return {
             websites: [],
             showModal: false,
+            showRemove: false,
             form: {
                 addWebUrl: '',
                 addWebName: ''
@@ -60,10 +70,26 @@ export default {
                 this.showModal = false;
             }
             else alert('请输入正确的网站地址')
+        },
+        handleRemove(index) {
+            this.websites.splice(index, 1);
+        },
+        handleHideRemove() {
+            this.showRemove = false;
+        },
+        handleClickOutside(event) {
+            const target = event.target;
+            if (!target.matches('.common-use-websites *')) {
+                this.handleHideRemove();
+            }
         }
     },
     mounted() {
-        this.websites = JSON.parse(localStorage.getItem('CommonUseWebsites') || '[]')
+        this.websites = JSON.parse(localStorage.getItem('CommonUseWebsites') || '[]');
+        document.body.addEventListener('click', this.handleClickOutside);
+    },
+    destroyed() {
+        document.body.removeEventListener('click', this.handleClickOutside);
     }
 }
 </script>
@@ -72,5 +98,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
+    .drag-content > span {
+        display: flex;
+        flex-wrap: wrap;
+    }
 }
 </style>

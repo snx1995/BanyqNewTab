@@ -1,10 +1,16 @@
 <template>
     <div class="common-use-website-item">
-        <div v-if="data" class="common-use-website-item-content" @click="openWebsite">
+        <div v-if="type == 'add'" class="common-use-website-item-add"></div>
+        <div v-else-if="type == 'remove'" class="common-use-website-item-remove"></div>
+        <div v-else class="common-use-website-item-content" :class="itemCls" @click="openWebsite">
             <img :src="data.src + '/favicon.ico'" v-if="showImg" @error="showImg = false">
             <span v-else>{{data.name}}</span>
         </div>
-        <div v-else class="common-use-website-item-add"></div>
+        <transition name="fade">
+            <div class="common-use-website-item-remove-btn btn" v-show="showRemove" @click="$emit('on-remove')">
+                <Icon type="cross"/>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
@@ -13,6 +19,20 @@ export default {
     props: {
         data: {
             type: Object
+        },
+        type: {
+            type: String,
+            default: 'default'
+        },
+        showRemove: Boolean
+    },
+    computed: {
+        itemCls() {
+            return [
+                {
+                    'show-remove': this.showRemove
+                }
+            ]
         }
     },
     data() {
@@ -22,6 +42,7 @@ export default {
     },
     methods: {
         openWebsite() {
+            if (this.showRemove) return;
             window.open(this.data.src);
         }
     }
@@ -32,19 +53,22 @@ export default {
     width: 50px;
     height: 50px;
     box-sizing: border-box;
-    border: 1px solid var(--secondaryBg);
-    transition: border .3s;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
-    cursor: pointer;
     margin-right: 10px;
-    background-color: var(--secondaryBg);
-    box-shadow: 0 12px  24px rgba(7, 17, 27, .3);
-    &:hover {
-        border-width: 5px;
-        border-color: var(--mainColor);
+    position: relative;
+    & > *:not(&-remove-btn) {
+        border: 1px solid var(--secondaryBg);
+        transition: border .3s;
+        background-color: var(--secondaryBg);
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 12px  24px rgba(7, 17, 27, .3);
+        &:not(.show-remove):hover {
+            border-width: 5px;
+            border-color: var(--mainColor);
+        }
     }
     &-content {
         width: 100%;
@@ -52,6 +76,9 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+        &.show-remove {
+            animation: itemRemoveAni .3s infinite;
+        }
         img {
             widows: 60%;
             height: 60%;
@@ -78,6 +105,38 @@ export default {
             width: 5px;
             height: 60%;
         }
+    }
+    &-remove {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        &::before {
+            content: "";
+            display: block;
+            background: var(--mainColor);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 5px;
+        }
+    }
+    &-remove-btn {
+        padding: 5px;
+        border-radius: 50%;
+        background-color: var(--secondaryBg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        color: var(--mainColor);
+        box-shadow: 0 0 4px rgba(7, 17, 27, .3);
+        left: 40px;
+        bottom: 40px;
+        z-index: 1;
+        cursor: pointer;
+        border: 1px solid var(--baseBg);
     }
 }
 </style>
