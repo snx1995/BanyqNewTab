@@ -21,6 +21,7 @@ module.exports = {
             '@assets': '@src/assets',
             '@components': '@src/components',
             '@common': '@components/common',
+            '@style': '@src/style',
         },
         extensions: ['.js', '.json', '.vue', '.less', '.css']
     },
@@ -50,6 +51,14 @@ module.exports = {
                     'css-loader',
                     'less-loader'
                 ]
+            },
+            {
+                test: /\.(svg|eot|ttf|woff)/,
+                loader: 'url-loader'
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif)/,
+                loader: 'url-loader'
             }
         ]
     },

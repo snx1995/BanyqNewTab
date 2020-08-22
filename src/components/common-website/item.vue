@@ -32,8 +32,8 @@ export default {
     width: 50px;
     height: 50px;
     box-sizing: border-box;
-    border: 1px solid var(--mainColor);
-    transition: border-width .3s;
+    border: 1px solid var(--secondaryBg);
+    transition: border .3s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,9 +41,10 @@ export default {
     cursor: pointer;
     margin-right: 10px;
     background-color: var(--secondaryBg);
-    box-shadow: 4px 4px 8px rgba(7, 17, 27, .3);
+    box-shadow: 0 12px  24px rgba(7, 17, 27, .3);
     &:hover {
         border-width: 5px;
+        border-color: var(--mainColor);
     }
     &-content {
         width: 100%;

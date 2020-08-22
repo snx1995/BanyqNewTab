@@ -2,16 +2,19 @@
     <div class="tab-index">
         <CommonUseWebsites/>
         <SwitchTheme/>
+        <FastCopy/>
     </div>
 </template>
 <script>
 import CommonUseWebsites from './common-website';
 import SwitchTheme from './switch-theme';
+import FastCopy from './fast-copy';
 export default {
     name: 'App',
     components: {
         CommonUseWebsites,
-        SwitchTheme
+        SwitchTheme,
+        FastCopy
     },
     data() {
         return {
@@ -22,6 +25,9 @@ export default {
 </script>
 <style lang="less" scoped>
 .tab-index {
-    
+    padding: 20px;
+    > *:not(:last-child) {
+        margin-bottom: 20px;
+    }
 }
 </style>

@@ -52,7 +52,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
-    padding: 10px;
     .content {
         
     }

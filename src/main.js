@@ -3,7 +3,7 @@ import CommonComponents from '@common';
 
 import App from '@components/app';
 
-import '@assets/index';
+import '@style/index';
 
 Vue.use(CommonComponents);
 
