@@ -19,7 +19,7 @@
     </div>
 </template>
 <script>
-import utils from '@utils'
+import utils from '@utils';
 import Item from './item';
 export default {
     name: 'CommonUseWebsites',
@@ -72,13 +72,5 @@ export default {
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
-    .add-dialog {
-        &-footer {
-            
-        }
-    }
-    .content {
-        
-    }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="common-use-website-item">
         <div v-if="data" class="common-use-website-item-content" @click="openWebsite">
-            <img :src="data.src + '/favicon.ico'" v-if="showImg">
+            <img :src="data.src + '/favicon.ico'" v-if="showImg" @error="showImg = false">
             <span v-else>{{data.name}}</span>
         </div>
         <div v-else class="common-use-website-item-add"></div>

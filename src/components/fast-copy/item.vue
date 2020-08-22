@@ -5,10 +5,13 @@
         </div>
         <div class="fast-copy-item-normal" v-else>
             <div class="fast-copy-item-prefix">
-                <Icon size="18" type="price-tag"/>
+                <Icon size="18" :type="isUrl ? 'compass2' : 'price-tag'"/>
             </div>
             <div class="fast-copy-item-input">
                 <input ref="input" type="text" :value="value" @input="$emit('input', $event.target.value)">
+            </div>
+            <div v-if="isUrl" class="fast-copy-item-suffix btn" @click="handleOpenUrl">
+                <Icon size="18" type="compass"/>
             </div>
             <div class="fast-copy-item-suffix btn" @click="handleCopy">
                 <Icon size="18" type="files-empty"/>
@@ -17,6 +20,7 @@
     </div>
 </template>
 <script>
+import utils from '@utils';
 export default {
     name: 'FastCopyItem',
     props: {
@@ -26,10 +30,18 @@ export default {
     data() {
         return {}
     },
+    computed: {
+        isUrl() {
+            return utils.isWebUrl(this.value);
+        }
+    },
     methods: {
         handleCopy() {
             this.$refs.input.select();
             document.execCommand('Copy');
+        },
+        handleOpenUrl() {
+            window.open(this.value);
         }
     }
 }
@@ -114,11 +126,16 @@ export default {
     &-suffix {
         width: 40px;
         flex-shrink: 0;
-        border: 1px solid var(--mainColor);
-        border-radius: 0 5px 5px 0;
         display: flex;
         justify-content: center;
         align-items: center;
+        border-top: 1px solid var(--mainColor);
+        border-bottom: 1px solid var(--mainColor);
+        border-left: 1px solid var(--mainColor);
+        &:last-child {
+            border: 1px solid var(--mainColor);
+            border-radius: 0 5px 5px 0;
+        }
     }
 }
 </style>
