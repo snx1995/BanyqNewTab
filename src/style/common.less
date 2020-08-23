@@ -16,18 +16,18 @@ body, html {
     transition: filter .3s;
     cursor: pointer;
     &:hover {
-        filter: brightness(.6);
+        opacity: .8;
     }
     &:active {
-        filter: brightness(.5);
+        opacity: .6;
     }
 }
 
 .form-el {
     transition: filter .3s;
-    filter: brightness(.7);
+    opacity: .7;
     &:hover, &:focus, &.focus {
-        filter: brightness(1);
+        opacity: 1;
     }
 }
 

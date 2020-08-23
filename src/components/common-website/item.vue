@@ -4,7 +4,7 @@
         <div v-else-if="type == 'remove'" class="common-use-website-item-remove"></div>
         <div v-else class="common-use-website-item-content" :class="itemCls" @click="openWebsite">
             <img :src="data.src + '/favicon.ico'" v-if="showImg" @error="showImg = false">
-            <span v-else>{{data.name}}</span>
+            <span v-else>{{data.name && data.name.substring(0, 2)}}</span>
         </div>
         <transition name="fade">
             <div class="common-use-website-item-remove-btn btn" v-show="showRemove" @click="$emit('on-remove')">

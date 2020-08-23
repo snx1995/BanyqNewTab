@@ -2,7 +2,9 @@
     <div class="input" :class="inputCls">
         <div class="input-label" :style="labelStyle">{{label}}</div>
         <div class="input-wrapper form-el" :class="{focus: isFocus}">
-            <input :type="type" :value="value" @input="$emit('input', $event.target.value)" @focus="isFocus = true" @blur="isFocus = false">
+            <input ref="input" v-if="type != 'textarea'" :type="type" :value="value" @input="$emit('input', $event.target.value)" @focus="isFocus = true" @blur="isFocus = false">
+            <textarea ref="input" v-else :style="textareaStyle" :value="value" @input="$emit('input', $event.target.value)" @focus="isFocus = true" @blur="isFocus = false">
+            </textarea>
         </div>
     </div>
 </template>
@@ -22,7 +24,8 @@ export default {
         labelWidth: {
             type: Number
         },
-        value: String
+        value: String,
+        height: String
     },
     computed: {
         inputCls() {
@@ -36,6 +39,11 @@ export default {
                 style.width = this.labelWidth + 'px';
             }
             return style;
+        },
+        textareaStyle() {
+            return {
+                height: this.height ? this.height : 'auto'
+            }
         }
     },
     data() {
@@ -44,7 +52,10 @@ export default {
         }
     },
     methods: {
-
+        copy() {
+            this.$refs.input.select();
+            document.execCommand('copy');
+        }
     },
 }
 </script>
@@ -55,6 +66,12 @@ export default {
     padding: 5px;
     &.label-top {
         flex-direction: column;
+        > * {
+            width: 100%;
+        }
+        .input-label {
+            padding-bottom: 5px;
+        }
     }
     &-label {
         flex-shrink: 0;
@@ -64,7 +81,7 @@ export default {
         flex: 1;
         border: 1px solid var(--mainColor);
         padding: 5px;
-        input {
+        input, textarea {
             border: none;
             box-shadow: none;
             outline: none;
@@ -72,6 +89,10 @@ export default {
             width: 100%;
             height: 100%;
             background: transparent;
+            resize: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
         }
     }
 }
