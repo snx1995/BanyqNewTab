@@ -1,9 +1,58 @@
 <template>
     <div class="byq-tab">
         <div class="byq-tab-content">
-            <CommonUseWebsites/>
+            <!-- <CommonApps/> -->
             <SwitchTheme/>
-            <FastCopy/>
+            <!-- <FastCopy/> -->
+            <Dropdown adaptWidth>
+                <button @click="val = 1">test</button>
+                <template v-slot:content>
+                    <div class="options">
+                        <div class="option">1</div>
+                        <div class="option">2</div>
+                        <div class="option">4</div>
+                    </div>
+                </template>
+            </Dropdown>
+            <Dropdown>
+                <button @click="val = 1">test2</button>
+                <template v-slot:content>
+                    <div class="options">
+                        <div class="option">1</div>
+                        <div class="option">4</div>
+                    </div>
+                </template>
+            </Dropdown>
+            <Dropdown adaptWidth>
+                <button @click="val = 1">test3</button>
+                <template v-slot:content>
+                    <div class="options">
+                        <div class="option">1</div>
+                        <div class="option">4</div>
+                        <div class="option">4</div>
+                        <div class="option">4</div>
+                    </div>
+                </template>
+            </Dropdown>
+            <Dropdown adaptWidth :maxHeight="250">
+                <button style="display: inline-block;width: 300px" @click="val = 1">test3</button>
+                <template v-slot:content>
+                    <div class="options">
+                        <div class="option">1</div>
+                        <div class="option">4</div>
+                        <div class="option">4</div>
+                        <div class="option">4</div>
+                        <div class="option">4</div>
+                        <div class="option">4</div>
+                        <div class="option">4</div>
+                        <div class="option">4</div>
+                        <div class="option">4</div>
+                        <div class="option">4</div>
+                        <div class="option">4</div>
+                        <div class="option">4</div>
+                    </div>
+                </template>
+            </Dropdown>
         </div>
         <div class="byq-tab-footer">
             <ActionBar />
@@ -11,21 +60,21 @@
     </div>
 </template>
 <script>
-import CommonUseWebsites from './common-website';
+import CommonApps from './common-apps';
 import SwitchTheme from './switch-theme';
 import FastCopy from './fast-copy';
 import ActionBar from './action-bar';
 export default {
     name: 'App',
     components: {
-        CommonUseWebsites,
+        CommonApps,
         SwitchTheme,
         FastCopy,
         ActionBar
     },
     data() {
         return {
-
+            val: 2
         }
     }
 }
@@ -45,6 +94,23 @@ export default {
     }
     &-footer {
         flex-shrink: 0;
+    }
+}
+</style>
+<style lang="less" scoped>
+.options {
+    background-color: #fff;
+    width: 100%;
+    box-shadow: 0 12px 24px rgba(7, 17, 27, .3);
+    .option {
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 0;
+        cursor: pointer;
+        &:hover {
+            background-color: #f5f5f5;
+        }
     }
 }
 </style>

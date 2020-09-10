@@ -1,0 +1,107 @@
+import Vue from 'vue';
+import menu from './dropdown-menu';
+
+import './dropdown.less';
+
+let regsterFlag = false
+let uuid = 0;
+const dropdownInstances = {}
+
+function onClickBody(...args) {
+    for(let k in dropdownInstances) {
+        const instance = dropdownInstances[k];
+        instance.hide()
+    }
+}
+
+function onSrcoll(...args) {
+    for(let k in dropdownInstances) {
+        const instance = dropdownInstances[k];
+        instance.update()
+    }
+}
+
+function hideExcept(uuid) {
+    for(let k in dropdownInstances) {
+        if (k == uuid) continue;
+        const instance = dropdownInstances[k];
+        instance.hide();
+    }
+}
+
+export default {
+    name: 'Dropdown',
+    props: {
+        trigger: {
+            type: String,
+            validator(val) {
+                return ['click', 'hover'].includes(val)
+            },
+            default: 'click'
+        },
+        adaptWidth: {
+            type: Boolean,
+            default: true
+        },
+        maxHeight: Number
+    },
+    data() {
+        return {
+            menuInstance: null,
+            uuid: uuid ++,
+            target: null
+        }
+    },
+    render(h) {
+        const vnode = this.$scopedSlots.default()[0]
+        if (!vnode.data) vnode.data = {}
+        if (!vnode.data.on) vnode.data.on = {}
+        if (vnode.data.on.click) {
+            const click = vnode.data.on.click
+            vnode.data.on.click = (event, ...args) => {
+                event.stopPropagation();
+                click(event, ...args);
+                this.onTargetClick(event, ...args);
+            }
+        } else vnode.data.on.click = this.onTargetClick
+
+        return vnode;
+    },
+    methods: {
+        onTargetClick() {
+            this.menuInstance.toggle(this.target)
+            hideExcept(this.uuid);
+        },
+        hide() {
+            this.menuInstance.hide();
+        },
+        update() {
+            this.menuInstance.update();
+        }
+    },
+    created() {
+        const DropdownMenu = Vue.extend(menu);
+        this.$nextTick(() => {
+            this.target = this.$el;
+            this.menuInstance = new DropdownMenu({
+                propsData: {
+                    content: this.$scopedSlots.content(),
+                    adaptWidth: this.adaptWidth,
+                    maxHeight: this.maxHeight
+                }
+            }).$mount();
+            document.body.appendChild(this.menuInstance.$el);
+        })
+        if (!regsterFlag) {
+            console.log(111111111111)
+            regsterFlag = true
+            document.addEventListener('click', onClickBody)
+            document.addEventListener('scroll', onscroll)
+        }
+        dropdownInstances[this.uuid] = this
+    },
+    destroyed() {
+        delete dropdownInstances[this.uuid]
+        this.menuInstance.$destroy()
+    }
+}

@@ -1,13 +1,16 @@
 <template>
-    <div class="common-use-website-item">
-        <div v-if="type == 'add'" class="common-use-website-item-add"></div>
-        <div v-else-if="type == 'remove'" class="common-use-website-item-remove"></div>
-        <div v-else class="common-use-website-item-content" :class="itemCls" @click="openWebsite">
+    <div class="common-use-app-item">
+        <div v-if="type == 'add'" class="common-use-app-item-add"></div>
+        <div v-else-if="type == 'remove'" class="common-use-app-item-remove"></div>
+        <div v-else-if="type == 'website'" class="common-use-app-item-content" :class="itemCls" @click="openWebsite">
             <img :src="data.src + '/favicon.ico'" v-if="showImg" @error="showImg = false">
             <span v-else>{{data.name && data.name.substring(0, 2)}}</span>
         </div>
+        <div v-else-if="type == 'app'" class="common-use-app-item-content" @click="openApp">
+
+        </div>
         <transition name="fade">
-            <div class="common-use-website-item-remove-btn btn" v-show="showRemove" @click="$emit('on-remove')">
+            <div class="common-use-app-item-remove-btn btn" v-show="showRemove" @click="$emit('on-remove')">
                 <Icon type="cross"/>
             </div>
         </transition>
@@ -15,7 +18,7 @@
 </template>
 <script>
 export default {
-    name: 'CommonUseWebsiteItem',
+    name: 'CommonUseAppItem',
     props: {
         data: {
             type: Object
@@ -44,12 +47,15 @@ export default {
         openWebsite() {
             if (this.showRemove) return;
             window.open(this.data.src);
+        },
+        openApp() {
+            
         }
     }
 }
 </script>
 <style lang="less" scoped>
-.common-use-website-item {
+.common-use-app-item {
     width: 50px;
     height: 50px;
     box-sizing: border-box;
@@ -68,6 +74,12 @@ export default {
         &:not(.show-remove):hover {
             border-width: 5px;
             border-color: var(--mainColor);
+        }
+    }
+    & > * {
+        transition: transform .3s;
+        &:active {
+            transform: scale(.9);
         }
     }
     &-content {
