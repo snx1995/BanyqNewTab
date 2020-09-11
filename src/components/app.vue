@@ -5,36 +5,14 @@
             <SwitchTheme/>
             <!-- <FastCopy/> -->
             <div style="height: 500px"></div>
-            <Dropdown adaptWidth>
-                <button @click="val = 1">test</button>
-                <template v-slot:content>
-                    <div class="options">
-                        <div class="option">1</div>
-                        <div class="option">2</div>
-                        <div class="option">4</div>
-                    </div>
-                </template>
-            </Dropdown>
-            <Dropdown>
-                <button @click="val = 1">test2</button>
-                <template v-slot:content>
-                    <div class="options">
-                        <div class="option">1</div>
-                        <div class="option">4</div>
-                    </div>
-                </template>
-            </Dropdown>
-            <Dropdown adaptWidth>
-                <button @click="val = 1">test3</button>
-                <template v-slot:content>
-                    <div class="options">
-                        <div class="option">1</div>
-                        <div class="option">4</div>
-                        <div class="option">4</div>
-                        <div class="option">4</div>
-                    </div>
-                </template>
-            </Dropdown>
+            <Select v-model="selectVal">
+                <Option value='1'/>
+                <Option value='2'/>
+                <Option value='3'/>
+                <Option value='4'/>
+                <Option value='5'/>
+                <Option value='6'/>
+            </Select>
             <Dropdown adaptWidth :maxHeight="250">
                 <button style="display: inline-block;width: 300px" @click="val = 1">test3</button>
                 <template v-slot:content>
@@ -54,6 +32,7 @@
                     </div>
                 </template>
             </Dropdown>
+
             <div style="height: 1000px"></div>
         </div>
         <div class="byq-tab-footer">
@@ -76,7 +55,8 @@ export default {
     },
     data() {
         return {
-            val: 2
+            val: 2,
+            selectVal: '1'
         }
     }
 }

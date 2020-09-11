@@ -43,7 +43,8 @@ export default {
             type: Boolean,
             default: true
         },
-        maxHeight: Number
+        maxHeight: Number,
+        context: Object
     },
     data() {
         return {
@@ -56,21 +57,28 @@ export default {
         const vnode = this.$scopedSlots.default()[0]
         if (!vnode.data) vnode.data = {}
         if (!vnode.data.on) vnode.data.on = {}
-        if (vnode.data.on.click) {
-            const click = vnode.data.on.click
-            vnode.data.on.click = (event, ...args) => {
-                event.stopPropagation();
-                click(event, ...args);
-                this.onTargetClick(event, ...args);
-            }
-        } else vnode.data.on.click = this.onTargetClick
+        if (!vnode.data.nativeOn) vnode.data.nativeOn = {}
+        if (this.trigger == 'click') {
+            if (vnode.data.on.click) {
+                const click = vnode.data.on.click
+                vnode.data.on.click = (event, ...args) => {
+                    event.stopPropagation();
+                    click(event, ...args);
+                    this.onTargetClick(event, ...args);
+                }
+            } else vnode.data.on.click = this.onTargetClick
+        }
 
         return vnode;
     },
     methods: {
-        onTargetClick() {
+        onTargetClick(event) {
+            event.stopPropagation();
             this.menuInstance.toggle(this.target)
             hideExcept(this.uuid);
+        },
+        show() {
+            this.menuInstance.show(this.$el);
         },
         hide() {
             this.menuInstance.hide();
@@ -88,7 +96,8 @@ export default {
                     content: this.$scopedSlots.content(),
                     adaptWidth: this.adaptWidth,
                     maxHeight: this.maxHeight,
-                    zIndex: this.uuid + 2000
+                    zIndex: this.uuid + 2000,
+                    context: this.context
                 }
             }).$mount();
             document.body.appendChild(this.menuInstance.$el);

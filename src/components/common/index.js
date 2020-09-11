@@ -3,7 +3,7 @@ import { Modal } from './modal';
 import { Icon } from './icon';
 import { Input } from './input';
 import { Dropdown } from './dropdown';
-import { Select } from './select';
+import { Select, Option } from './select';
 
 const components = {
     Button,
@@ -12,7 +12,8 @@ const components = {
     Input,
     Modal,
     Dropdown,
-    Select
+    Select,
+    Option
 }
 
 function install(vue, options) {

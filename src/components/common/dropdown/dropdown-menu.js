@@ -1,10 +1,16 @@
 export default {
     name: 'DropdownMenu',
+    provide() {
+        return {
+            context: this.context
+        }
+    },
     props: {
         maxHeight: Number,
         adaptWidth: Boolean,
         content: [Object, Array],
-        zIndex: Number
+        zIndex: Number,
+        context: Object
     },
     data() {
         return {
