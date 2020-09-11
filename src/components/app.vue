@@ -4,6 +4,7 @@
             <!-- <CommonApps/> -->
             <SwitchTheme/>
             <!-- <FastCopy/> -->
+            <div style="height: 500px"></div>
             <Dropdown adaptWidth>
                 <button @click="val = 1">test</button>
                 <template v-slot:content>
@@ -53,6 +54,7 @@
                     </div>
                 </template>
             </Dropdown>
+            <div style="height: 1000px"></div>
         </div>
         <div class="byq-tab-footer">
             <ActionBar />

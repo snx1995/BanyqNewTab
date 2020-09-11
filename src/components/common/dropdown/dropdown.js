@@ -14,7 +14,7 @@ function onClickBody(...args) {
     }
 }
 
-function onSrcoll(...args) {
+function onScroll(...args) {
     for(let k in dropdownInstances) {
         const instance = dropdownInstances[k];
         instance.update()
@@ -76,7 +76,7 @@ export default {
             this.menuInstance.hide();
         },
         update() {
-            this.menuInstance.update();
+            this.menuInstance.update(this.$el);
         }
     },
     created() {
@@ -87,16 +87,16 @@ export default {
                 propsData: {
                     content: this.$scopedSlots.content(),
                     adaptWidth: this.adaptWidth,
-                    maxHeight: this.maxHeight
+                    maxHeight: this.maxHeight,
+                    zIndex: this.uuid + 2000
                 }
             }).$mount();
             document.body.appendChild(this.menuInstance.$el);
         })
         if (!regsterFlag) {
-            console.log(111111111111)
             regsterFlag = true
             document.addEventListener('click', onClickBody)
-            document.addEventListener('scroll', onscroll)
+            document.addEventListener('scroll', onScroll)
         }
         dropdownInstances[this.uuid] = this
     },

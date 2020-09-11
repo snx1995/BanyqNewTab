@@ -3,7 +3,8 @@ export default {
     props: {
         maxHeight: Number,
         adaptWidth: Boolean,
-        content: [Object, Array]
+        content: [Object, Array],
+        zIndex: Number
     },
     data() {
         return {
@@ -16,25 +17,31 @@ export default {
         }
     },
     render(h) {
-        return h('transition', {
-            attrs: {
-                name: 'fade'
-            }
-        },
-        [
-            h('div', {
-                class: [
-                    'dropdown-menu'
-                ],
-                style: this.styles,
-                directives: [
+        return h(
+            'transition', 
+            {
+                props: {
+                    name: 'fade'
+                },
+                // on: {
+                //     beforeEnter: this.beforeEnter,
+                //     beforeLeave: this.beforeLeave,
+                //     enter: this.enter,
+                //     leave: this.leave
+                // }
+            },
+            [
+                h(
+                    'div', 
                     {
-                        name: 'show',
-                        value: this.showDrop
-                    }
-                ]
-            }, this.content)
-        ])
+                        class: [ 'dropdown-menu'],
+                        style: this.styles,
+                        directives: [{ name: 'show', value: this.showDrop }]
+                    },
+                    [h('div', { class: ['dropdown-menu-content'] }, this.content)]
+                )
+            ]
+        )
     },
     computed: {
         styles() {
@@ -44,14 +51,14 @@ export default {
             }
             if (this.width) result.width = this.width + 'px';
             if (this.height) result.height = this.height + 'px';
+            if (this.zIndex) result.zIndex = this.zIndex;
             return result
         }
     },
     methods: {
-        show({x, y}) {
-            this.x = x;
-            this.y = y;
+        show(target) {
             this.showDrop = true
+            this.update(target);
         },
         hide() {
             this.showDrop = false
@@ -62,20 +69,37 @@ export default {
             this.update(target);
             return this.showDrop;
         },
+        // beforeEnter(el) {
+        //     el.style.opacity = 0;
+        //     el.style.transform = 'scaleY(.5)';
+        //     el.style.transformOrigin = this.up ? '0 100%' : '0 0';
+        // },
+        // enter(el, done) {
+        //     Velocity(el, { scaleY: 1, opacity: 1 }, { duration: 300, complete: done });
+        // },
+        // beforeLeave(el) {
+        //     el.style.opacity = 1;
+        //     el.style.transform = 'scaleY(1)';
+        //     el.style.transformOrigin = this.up ? '0 100%' : '0 0';
+        // },
+        // leave(el, done) {
+        //     Velocity(el, { scaleY: .5, opacity: 0 }, { duration: 300, complete: done });
+        // },
         update(target) {
             this.$nextTick(() => {
-                if (!this.showDrop) return;
-                const { left, top, width, height } = target.getBoundingClientRect();
-                const { width: dw, height: dh } = this.$el.getBoundingClientRect();
-                const { width: vw, height: vh } = this.getViewportRect();
-                const x = left + dw + 20 > vw ? (vw - dw) : left;
-                this.up = top + dh + height > vh;
-                const y = this.up ? (vh - dh) : (top + height);
-                this.x = x;
-                this.y = y;
-                this.height = this.maxHeight && dh > this.maxHeight ? this.maxHeight : 0;
-                this.width = this.adaptWidth ? width : 0;
-                debugger
+                setTimeout(() => {
+                    if (!this.showDrop) return;
+                    const { left, top, width, height } = target.getBoundingClientRect();
+                    const { width: dw, height: dh } = this.$el.children[0].getBoundingClientRect();
+                    const { width: vw, height: vh } = this.getViewportRect();
+                    this.height = this.maxHeight && dh > this.maxHeight ? this.maxHeight : dh;
+                    this.width = this.adaptWidth ? width : 0;
+                    const x = left + dw + 20 > vw ? (vw - dw) : left;
+                    this.up = top + this.height + height > vh;
+                    const y = this.up ? (top - this.height) : (top + height);
+                    this.x = x;
+                    this.y = y;
+                }, 0)
             })
         },
         getViewportRect() {

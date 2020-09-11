@@ -2,6 +2,8 @@ import Vue from 'vue';
 import CommonComponents from '@common';
 import VueDraggable from 'vuedraggable';
 
+import '@lib/velocity.min.js';
+
 import App from '@components/app';
 
 import '@style/index';
