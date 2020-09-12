@@ -1,5 +1,5 @@
 <template>
-    <div class="select-option" @click="handleSelect">
+    <div class="select-option" @click="handleSelect" v-show="showOption">
         <slot>{{value}}</slot>
     </div>
 </template>
@@ -12,12 +12,16 @@ export default {
     },
     data() {
         return {
-
+            showOption: true
+        }
+    },
+    watch: {
+        'context.filterValue'(val) {
+            this.showOption = this.context.filter(this.value);
         }
     },
     methods: {
         handleSelect() {
-            debugger
             this.context.onOptionSelect(this.value);
         }
     }

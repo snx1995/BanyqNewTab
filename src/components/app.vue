@@ -13,6 +13,14 @@
                 <Option value='5'/>
                 <Option value='6'/>
             </Select>
+            <Select v-model="selectVal" filterable>
+                <Option value='1'/>
+                <Option value='2'/>
+                <Option value='3'/>
+                <Option value='4'/>
+                <Option value='5'/>
+                <Option value='6'/>
+            </Select>
             <Dropdown adaptWidth :maxHeight="250">
                 <button style="display: inline-block;width: 300px" @click="val = 1">test3</button>
                 <template v-slot:content>
@@ -32,7 +40,7 @@
                     </div>
                 </template>
             </Dropdown>
-
+            <IconExample />
             <div style="height: 1000px"></div>
         </div>
         <div class="byq-tab-footer">
@@ -45,19 +53,25 @@ import CommonApps from './common-apps';
 import SwitchTheme from './switch-theme';
 import FastCopy from './fast-copy';
 import ActionBar from './action-bar';
+
+import IconExample from './common/example/icon';
 export default {
     name: 'App',
     components: {
         CommonApps,
         SwitchTheme,
         FastCopy,
-        ActionBar
+        ActionBar,
+        IconExample
     },
     data() {
         return {
             val: 2,
             selectVal: '1'
         }
+    },
+    mounted() {
+        
     }
 }
 </script>

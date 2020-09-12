@@ -74,14 +74,16 @@ export default {
     methods: {
         onTargetClick(event) {
             event.stopPropagation();
-            this.menuInstance.toggle(this.target)
+            this.$emit('toggle', this.menuInstance.toggle(this.target));
             hideExcept(this.uuid);
         },
         show() {
             this.menuInstance.show(this.$el);
+            this.$emit('toggle', true);
         },
         hide() {
             this.menuInstance.hide();
+            this.$emit('toggle', false);
         },
         update() {
             this.menuInstance.update(this.$el);

@@ -7,12 +7,20 @@ export default {
     props: {
         type: String,
         size: {
-            type: [Number, String],
-            default: 12
+            type: [Number, String]
+        }
+    },
+    computed: {
+        style() {
+            return {
+                fontSize: this.size ? this.size + 'px' : ''
+            }
         }
     }
 }
 </script>
 <style lang="less" scoped>
-
+i {
+    color: inherit;
+}
 </style>
