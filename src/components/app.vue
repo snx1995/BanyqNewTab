@@ -40,6 +40,32 @@
                     </div>
                 </template>
             </Dropdown>
+            <Table>
+                <TableColumn>
+                    <div>test1</div>
+                </TableColumn>
+                <TableColumn>
+                    <div>test2</div>
+                </TableColumn>
+                <TableColumn>
+                    <div>test3</div>
+                </TableColumn>
+                <TableColumn>
+                    <div>test4</div>
+                </TableColumn>
+                <TableColumn>
+                    <div>test5</div>
+                </TableColumn>
+                <TableColumn>
+                    <div>test6</div>
+                </TableColumn>
+                <TableColumn>
+                    <div>test7</div>
+                </TableColumn>
+                <TableColumn>
+                    <div>test8</div>
+                </TableColumn>
+            </Table>
             <IconExample />
             <div style="height: 1000px"></div>
         </div>

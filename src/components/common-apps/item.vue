@@ -148,7 +148,7 @@ export default {
         bottom: 40px;
         z-index: 1;
         cursor: pointer;
-        border: 1px solid var(--baseBg);
+        border: 1px solid var(--mainBg);
     }
 }
 </style>

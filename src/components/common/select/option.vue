@@ -30,7 +30,7 @@ export default {
 <style lang="less" scoped>
 .select-option {
     padding: 10px;
-    background-color: var(--baseBg);
+    background-color: var(--mainBg);
     color: var(--primaryFontColor);
     cursor: pointer;
     &:hover {

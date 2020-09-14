@@ -36,7 +36,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .app-window {
-    background-color: var(--baseBg);
+    background-color: var(--mainBg);
     position: fixed;
     display: flex;
     flex-direction: column;

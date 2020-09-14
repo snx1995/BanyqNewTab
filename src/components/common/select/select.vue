@@ -85,7 +85,7 @@ export default {
     display: inline-block;
     padding: 10px;
     border: 1px solid var(--mainColor);
-    background: var(--baseBg);
+    background: var(--mainBg);
     cursor: pointer;
     border-radius: 5px;
     &-wrapper {
