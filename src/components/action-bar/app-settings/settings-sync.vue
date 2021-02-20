@@ -8,6 +8,7 @@
     </SettingItem>
 </template>
 <script>
+import { Storage } from '@utils/storage';
 import SettingItem from './item';
 export default {
     name: 'AppSettingsSync',
@@ -21,7 +22,7 @@ export default {
     },
     methods: {
         handleExport() {
-            this.settings = JSON.stringify(localStorage);
+            this.settings = Storage.getAllData();
             this.$nextTick(() => this.$refs.input.copy());
         },
         handleImport() {
@@ -29,7 +30,7 @@ export default {
                 const settings = JSON.parse(this.settings)
                 if (confirm('将刷新页面，确认继续?')) {
                     for (let k in settings) {
-                        localStorage.setItem(k, settings[k]);
+                        Storage.save(k, settings[k], false);
                     }
                     location.reload();
                 }

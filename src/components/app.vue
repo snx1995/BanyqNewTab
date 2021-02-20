@@ -1,10 +1,10 @@
 <template>
     <div class="byq-tab">
         <div class="byq-tab-content">
-            <!-- <CommonApps/> -->
+            <CommonApps/>
             <SwitchTheme/>
-            <!-- <FastCopy/> -->
-            <div style="height: 500px"></div>
+            <FastCopy/>
+            <!-- <div style="height: 500px"></div>
             <Select v-model="selectVal">
                 <Option value='1'/>
                 <Option value='2'/>
@@ -67,7 +67,7 @@
                 </TableColumn>
             </Table>
             <IconExample />
-            <div style="height: 1000px"></div>
+            <div style="height: 1000px"></div> -->
         </div>
         <div class="byq-tab-footer">
             <ActionBar />
@@ -110,6 +110,8 @@ export default {
     &-content {
         padding: 20px;
         flex: 1;
+        min-height: 0;
+        overflow: auto;
          > *:not(:last-child) {
             margin-bottom: 20px;
         }

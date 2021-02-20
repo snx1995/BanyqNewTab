@@ -5,16 +5,16 @@
         </div>
         <div class="fast-copy-item-normal" v-else>
             <div class="fast-copy-item-prefix">
-                <Icon size="18" :type="isUrl ? 'compass2' : 'price-tag'"/>
+                <Icon size="18" :type="isUrl ? 'globe' : 'star-o'"/>
             </div>
             <div class="fast-copy-item-input">
-                <input ref="input" type="text" :value="value" @input="$emit('input', $event.target.value)">
+                <input ref="input" type="text" :value="value" @input="$emit('input', $event.target.value)" @keydown="handleKeydown">
             </div>
             <div v-if="isUrl" class="fast-copy-item-suffix btn" @click="handleOpenUrl">
-                <Icon size="18" type="compass"/>
+                <Icon size="18" type="location-arrow"/>
             </div>
             <div class="fast-copy-item-suffix btn" @click="handleCopy">
-                <Icon size="18" type="files-empty"/>
+                <Icon size="18" type="copy"/>
             </div>
         </div>
     </div>
@@ -42,6 +42,23 @@ export default {
         },
         handleOpenUrl() {
             window.open(this.value);
+        },
+        handleKeydown(event) {
+            console.log(event.key);
+            if (event.key === 'Backspace' && !this.value) {
+                this.$emit('delete')
+            } else if (event.key === 'Enter') {
+                this.$emit('add');
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                this.$emit('up');
+            } else if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                this.$emit('down');
+            }
+        },
+        focus() {
+            this.$refs.input.focus();
         }
     }
 }

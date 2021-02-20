@@ -29,6 +29,9 @@
 </template>
 <script>
 import utils from '@utils';
+
+import { Storage } from '@utils/storage'
+
 import Item from './item';
 export default {
     name: 'CommonUseApps',
@@ -66,7 +69,7 @@ export default {
             const url = this.form.addWebUrl
             const name = this.form.addWebName
             if (utils.isWebUrl(url)) {
-                this.apps.push({ type: 'websites', src: url, name });
+                this.apps.push({ type: 'website', src: url, name });
                 this.showModal = false;
             }
             else alert('请输入正确的网站地址')

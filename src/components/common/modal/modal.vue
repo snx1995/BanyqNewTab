@@ -89,6 +89,8 @@ export default {
     }
     .body {
         flex: 1;
+        min-height: 0;
+        overflow: auto;
     }
     .header.show-line {
         border-bottom: 1px solid var(--mainColor);
@@ -104,6 +106,7 @@ export default {
         border-radius: 10px;
         display: flex;
         flex-direction: column;
+        max-height: 100%;
     }
 }
 </style>

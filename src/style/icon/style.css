@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'banyq';
-  src:  url('fonts/banyq.eot?1g5hij');
-  src:  url('fonts/banyq.eot?1g5hij#iefix') format('embedded-opentype'),
-    url('fonts/banyq.ttf?1g5hij') format('truetype'),
-    url('fonts/banyq.woff?1g5hij') format('woff'),
-    url('fonts/banyq.svg?1g5hij#banyq') format('svg');
+  src:  url('fonts/banyq.eot?u2bwpb');
+  src:  url('fonts/banyq.eot?u2bwpb#iefix') format('embedded-opentype'),
+    url('fonts/banyq.ttf?u2bwpb') format('truetype'),
+    url('fonts/banyq.woff?u2bwpb') format('woff'),
+    url('fonts/banyq.svg?u2bwpb#banyq') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -343,7 +343,7 @@
 .byq-icon-chevron-circle-down:before {
   content: "\f13a";
 }
-.byq-icon-check-square:before {
+.byq-icon-check-square1:before {
   content: "\f14a";
 }
 .byq-icon-pencil-square:before {
@@ -423,4 +423,37 @@
 }
 .byq-icon-weixin:before {
   content: "\f1d7";
+}
+.byq-icon-cut:before {
+  content: "\f0c4";
+}
+.byq-icon-scissors:before {
+  content: "\f0c4";
+}
+.byq-icon-copy:before {
+  content: "\f0c5";
+}
+.byq-icon-files-o:before {
+  content: "\f0c5";
+}
+.byq-icon-floppy-o:before {
+  content: "\f0c7";
+}
+.byq-icon-save:before {
+  content: "\f0c7";
+}
+.byq-icon-minus-square:before {
+  content: "\f146";
+}
+.byq-icon-minus-square-o:before {
+  content: "\f147";
+}
+.byq-icon-check-square:before {
+  content: "\f14e";
+}
+.byq-icon-file:before {
+  content: "\f15b";
+}
+.byq-icon-file-text:before {
+  content: "\f15c";
 }
