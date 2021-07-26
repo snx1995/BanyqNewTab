@@ -21,7 +21,7 @@ module.exports = {
             '@assets': '@src/assets',
             '@components': '@src/components',
             '@common': '@components/common',
-            '@style': '@src/style',
+            '@style': '@assets/style',
             '@utils': '@src/utils',
             '@lib': '@src/lib',
         },
@@ -56,7 +56,8 @@ module.exports = {
             },
             {
                 test: /\.(svg|eot|ttf|woff)/,
-                loader: 'url-loader'
+                loader: 'url-loader',
+                include: [ path.resolve(__dirname, '../src/assets/style/icon/'), path.resolve(__dirname, '../node_modules') ]
             },
             {
                 test: /\.(png|jpg|jpeg|gif)/,
@@ -77,7 +78,8 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 'manifest.json',
-                'logo.png'
+                'logo.png',
+                'popup.html'
             ]
         })
     ]

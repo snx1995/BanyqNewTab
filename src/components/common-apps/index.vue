@@ -30,7 +30,7 @@
 <script>
 import utils from '@utils';
 
-import { Storage } from '@utils/storage'
+import { ExtensionStorage } from '@utils/storage'
 
 import Item from './item';
 export default {

@@ -21,6 +21,7 @@
             "16": "logo.png",
             "24": "logo.png",
             "32": "logo.png"
-        }
+        },
+        "default_popup": "popup.html"
     }
 }
